@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDatabase } from './config/database.js';
+import { AuthController } from './controllers/authController.js';
 import { ProductController } from './controllers/productController.js';
 
 // Load environment variables
@@ -52,7 +53,7 @@ class AppServer extends Server {
   }
 
   private setupControllers(): void {
-    super.addControllers([new ProductController()]);
+    super.addControllers([new AuthController(), new ProductController()]);
   }
 
   public async start(port: number): Promise<void> {

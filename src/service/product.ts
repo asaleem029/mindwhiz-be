@@ -1,5 +1,5 @@
 
-import { ProductRepository } from '../repository/productRepository.js';
+import { ProductRepository } from '../repository/index';
 import { ProductMessages } from '../utils/responseMessages/index.js';
 import { ApiError, ApiSuccess } from '../utils/responses.js';
 
