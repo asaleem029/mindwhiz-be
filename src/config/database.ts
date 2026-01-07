@@ -21,7 +21,7 @@ const getDbConfig = () => {
       port: dbPort,
       user: dbUser,
       database: dbName,
-      password: dbPassword ? '***' : 'not set',
+      password: dbPassword,
     });
   }
 
