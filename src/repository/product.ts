@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../config/database.js';
 import { Product } from '../models/productModel.js';
-import { validateOrReject } from 'class-validator';
+import { OrmExceptionHandling } from '../utils/OrmExceptionHandling.js';
 
 export abstract class ProductRepository {
     private _repo: Repository<Product>;
@@ -13,7 +13,6 @@ export abstract class ProductRepository {
     async createOne(params: any) {
         try {
             const productEntity = this._repo.create(params);
-            await validateOrReject(productEntity, { validationError: { target: false, value: false } });
             const product = await this._repo.save(productEntity);
             return product;
         } catch (error) {

@@ -1,6 +1,7 @@
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../config/database.js';
 import { User } from '../models/userModel.js';
+import { OrmExceptionHandling } from '../utils/OrmExceptionHandling.js';
 
 export abstract class AuthRepository {
     private _repo: Repository<User>;

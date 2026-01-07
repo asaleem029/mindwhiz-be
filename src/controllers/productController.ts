@@ -1,17 +1,20 @@
-import { Controller, Get, Post } from '@overnightjs/core';
+import { Controller, Get, Post, Middleware } from '@overnightjs/core';
 import { BaseController } from './baseController.js';
 import { Response } from 'express';
 import { ProductRoutes } from '../utils/routes/index.js';
 import { ICustomHeaders, ICustomRequest } from '../utils/index.js';
 import { ProductService } from '../service/index.js';
+import { UserRole } from '../models/userModel';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 @Controller(ProductRoutes.PRODUCT_BASE_ROUTE)
 export class ProductController extends BaseController {
 
   // --------------------------------------
-  // CREATE PRODUCT
+  // CREATE PRODUCT (Requires Authentication & Admin Role)
   // --------------------------------------
   @Post(ProductRoutes.PRODUCT)
+  @Middleware([authenticate, authorize(UserRole.ADMIN)])
   private async _create(req: ICustomRequest, res: Response) {
     const { language } = req.headers as unknown as ICustomHeaders;
     try {
@@ -23,7 +26,7 @@ export class ProductController extends BaseController {
   }
 
   // --------------------------------------
-  // GET ALL PRODUCTS
+  // GET ALL PRODUCTS (Public access or can be protected depending on requirement)
   // --------------------------------------
   @Get(ProductRoutes.PRODUCT)
   private async _getAll(req: ICustomRequest, res: Response) {
@@ -37,7 +40,7 @@ export class ProductController extends BaseController {
   }
 
   // --------------------------------------
-  // GET PRODUCT BY ID
+  // GET PRODUCT BY ID (Public or can be protected depending on the requirement)
   // --------------------------------------
   @Get(ProductRoutes.PRODUCT_BY_ID)
   private async _get(req: ICustomRequest, res: Response) {

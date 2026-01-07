@@ -23,7 +23,7 @@ class ProductService extends ProductRepository {
 
     async getAll(query: any) {
         try {
-            const data = await this.find(query);
+            const { data } = await this.find(query);
 
             return ApiSuccess.format({
                 message: ProductMessages.PRODUCT_LIST_FETCHED.message,
