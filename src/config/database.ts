@@ -1,5 +1,7 @@
 import { DataSource } from 'typeorm';
 import * as dotenv from 'dotenv';
+import { Product } from '../models/productModel.js';
+import { User } from '../models/userModel.js';
 
 // Load environment variables if not already loaded
 dotenv.config();
@@ -30,7 +32,7 @@ const getDbConfig = () => {
     username: dbUser,
     password: dbPassword,
     database: dbName,
-    entities: [],
+    entities: [Product, User],
     synchronize: process.env.NODE_ENV !== 'production',
     logging: process.env.NODE_ENV === 'development',
   };
