@@ -8,7 +8,11 @@ export interface ICustomRequest extends Request {
   };
 }
 
+enum LANGUAGE {
+  EN = "EN",
+}
+
 export interface ICustomHeaders {
-  language?: string;
+  language: LANGUAGE;
 }
 
